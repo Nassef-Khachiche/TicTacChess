@@ -1,0 +1,10 @@
+C:\Users\nasse\source\repos\TicTacChess\TicTacChess\bin\Debug\TicTacChess.exe.config
+C:\Users\nasse\source\repos\TicTacChess\TicTacChess\bin\Debug\TicTacChess.exe
+C:\Users\nasse\source\repos\TicTacChess\TicTacChess\bin\Debug\TicTacChess.pdb
+C:\Users\nasse\source\repos\TicTacChess\TicTacChess\obj\Debug\TicTacChess.csproj.AssemblyReference.cache
+C:\Users\nasse\source\repos\TicTacChess\TicTacChess\obj\Debug\TicTacChess.Form1.resources
+C:\Users\nasse\source\repos\TicTacChess\TicTacChess\obj\Debug\TicTacChess.Properties.Resources.resources
+C:\Users\nasse\source\repos\TicTacChess\TicTacChess\obj\Debug\TicTacChess.csproj.GenerateResource.cache
+C:\Users\nasse\source\repos\TicTacChess\TicTacChess\obj\Debug\TicTacChess.csproj.CoreCompileInputs.cache
+C:\Users\nasse\source\repos\TicTacChess\TicTacChess\obj\Debug\TicTacChess.exe
+C:\Users\nasse\source\repos\TicTacChess\TicTacChess\obj\Debug\TicTacChess.pdb
