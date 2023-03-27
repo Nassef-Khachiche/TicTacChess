@@ -77,7 +77,7 @@ namespace TicTacChess
             this.gbxBoard.Controls.Add(this.pcbThree);
             this.gbxBoard.Controls.Add(this.pcbTwo);
             this.gbxBoard.Controls.Add(this.pcbOne);
-            this.gbxBoard.Location = new System.Drawing.Point(12, 65);
+            this.gbxBoard.Location = new System.Drawing.Point(12, 87);
             this.gbxBoard.Name = "gbxBoard";
             this.gbxBoard.Size = new System.Drawing.Size(454, 371);
             this.gbxBoard.TabIndex = 0;
@@ -206,7 +206,7 @@ namespace TicTacChess
             this.groupBox2.Controls.Add(this.pcbQueen);
             this.groupBox2.Controls.Add(this.pcbRook);
             this.groupBox2.Controls.Add(this.pcbKnight);
-            this.groupBox2.Location = new System.Drawing.Point(472, 65);
+            this.groupBox2.Location = new System.Drawing.Point(485, 87);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(134, 371);
             this.groupBox2.TabIndex = 1;
@@ -253,7 +253,7 @@ namespace TicTacChess
             // 
             this.lblStatus.AutoSize = true;
             this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.lblStatus.Location = new System.Drawing.Point(147, 42);
+            this.lblStatus.Location = new System.Drawing.Point(192, 32);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(197, 20);
             this.lblStatus.TabIndex = 2;
@@ -263,7 +263,7 @@ namespace TicTacChess
             // 
             this.btnRestart.BackColor = System.Drawing.Color.WhiteSmoke;
             this.btnRestart.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnRestart.Location = new System.Drawing.Point(12, 4);
+            this.btnRestart.Location = new System.Drawing.Point(12, 12);
             this.btnRestart.Name = "btnRestart";
             this.btnRestart.Size = new System.Drawing.Size(129, 60);
             this.btnRestart.TabIndex = 3;
@@ -273,7 +273,7 @@ namespace TicTacChess
             // rdbWhite
             // 
             this.rdbWhite.AutoSize = true;
-            this.rdbWhite.Location = new System.Drawing.Point(472, 25);
+            this.rdbWhite.Location = new System.Drawing.Point(485, 25);
             this.rdbWhite.Name = "rdbWhite";
             this.rdbWhite.Size = new System.Drawing.Size(65, 21);
             this.rdbWhite.TabIndex = 4;
@@ -285,7 +285,7 @@ namespace TicTacChess
             // rdbBlack
             // 
             this.rdbBlack.AutoSize = true;
-            this.rdbBlack.Location = new System.Drawing.Point(543, 25);
+            this.rdbBlack.Location = new System.Drawing.Point(556, 25);
             this.rdbBlack.Name = "rdbBlack";
             this.rdbBlack.Size = new System.Drawing.Size(63, 21);
             this.rdbBlack.TabIndex = 5;
@@ -299,7 +299,7 @@ namespace TicTacChess
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(631, 448);
+            this.ClientSize = new System.Drawing.Size(631, 470);
             this.Controls.Add(this.rdbBlack);
             this.Controls.Add(this.rdbWhite);
             this.Controls.Add(this.btnRestart);
