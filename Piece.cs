@@ -16,6 +16,8 @@ namespace TicTacChess
         private string moveOptions;
         int oldHor, oldVer, newHor, newVer;
 
+        private bool IsOnBoard = false;
+
 
         //Constructor
         public Piece(string aName, string aColor) 
@@ -25,17 +27,28 @@ namespace TicTacChess
             basePictureBoxName = "pcb" + name;
         }
 
-
+        
         public void SetCurrentPictureBox(string newCurrentPictureBoxName) 
         {
             currentPictureBoxName = newCurrentPictureBoxName;
         }
-
+        
+        #region Values
         public string GetName() { return name; }
         public string GetColor() { return color; }
         public string GetBasePictureBoxName() { return basePictureBoxName; }
         public string GetCurrentPictureBox() { return currentPictureBoxName; }
+        public void SetIsOnBoard(bool onBoard) 
+        {
+            IsOnBoard = onBoard;
+        }
+        public bool GetIsOnBoard() 
+        {
+            return IsOnBoard;
+        }
+        #endregion
 
+        #region Movement
         public string GetMoveOptions(int curHor, int curVer, int _newHor, int _newVer) 
         {
             oldHor = curHor;
@@ -47,7 +60,7 @@ namespace TicTacChess
             switch (name)
             {
                 case "Rook": MoveRook(); break;
-                case "Knight": MoveKnight();  break;
+                case "Knight": MoveKnight(); break;
                 case "Queen": MoveQueen(); break;
                 default:
                     break;
@@ -55,8 +68,6 @@ namespace TicTacChess
 
             return moveOptions;
         }
-
-
         public void MoveRook() 
         {
             int tempHor = Math.Abs(newHor - oldHor);
@@ -78,13 +89,12 @@ namespace TicTacChess
                 }
             }
         }
-
         public void MoveQueen()
         {
             int tempHor = Math.Abs(newHor - oldHor);
             int tempVer = Math.Abs(newVer - oldVer);
 
-            if (tempVer == tempHor)
+            if (tempHor == tempVer)
             {
                 moveOptions = newHor.ToString() + newVer.ToString();
             }
@@ -104,8 +114,6 @@ namespace TicTacChess
                 }
             }
         }
-
-
         public void MoveKnight()
         {
             int tempHor = Math.Abs(newHor - oldHor);
@@ -130,5 +138,6 @@ namespace TicTacChess
             }
         }
 
+        #endregion
     }
 }

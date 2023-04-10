@@ -40,7 +40,7 @@ namespace TicTacChess
             this.pcbThree = new System.Windows.Forms.PictureBox();
             this.pcbTwo = new System.Windows.Forms.PictureBox();
             this.pcbOne = new System.Windows.Forms.PictureBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.gbxPieces = new System.Windows.Forms.GroupBox();
             this.pcbQueen = new System.Windows.Forms.PictureBox();
             this.pcbRook = new System.Windows.Forms.PictureBox();
             this.pcbKnight = new System.Windows.Forms.PictureBox();
@@ -58,7 +58,7 @@ namespace TicTacChess
             ((System.ComponentModel.ISupportInitialize)(this.pcbThree)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbTwo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbOne)).BeginInit();
-            this.groupBox2.SuspendLayout();
+            this.gbxPieces.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbQueen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbRook)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbKnight)).BeginInit();
@@ -94,6 +94,7 @@ namespace TicTacChess
             this.pcbNine.TabStop = false;
             this.pcbNine.Tag = "33";
             this.pcbNine.DragDrop += new System.Windows.Forms.DragEventHandler(this.pcbBoard_DragDrop);
+            this.pcbNine.DragEnter += new System.Windows.Forms.DragEventHandler(this.pcbBoard_DragEnter);
             this.pcbNine.DragOver += new System.Windows.Forms.DragEventHandler(this.pcbBoard_DragOver);
             this.pcbNine.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pcbBoard_MouseDown);
             // 
@@ -107,6 +108,7 @@ namespace TicTacChess
             this.pcbEight.TabStop = false;
             this.pcbEight.Tag = "23";
             this.pcbEight.DragDrop += new System.Windows.Forms.DragEventHandler(this.pcbBoard_DragDrop);
+            this.pcbEight.DragEnter += new System.Windows.Forms.DragEventHandler(this.pcbBoard_DragEnter);
             this.pcbEight.DragOver += new System.Windows.Forms.DragEventHandler(this.pcbBoard_DragOver);
             this.pcbEight.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pcbBoard_MouseDown);
             // 
@@ -120,6 +122,7 @@ namespace TicTacChess
             this.pcbSeven.TabStop = false;
             this.pcbSeven.Tag = "13";
             this.pcbSeven.DragDrop += new System.Windows.Forms.DragEventHandler(this.pcbBoard_DragDrop);
+            this.pcbSeven.DragEnter += new System.Windows.Forms.DragEventHandler(this.pcbBoard_DragEnter);
             this.pcbSeven.DragOver += new System.Windows.Forms.DragEventHandler(this.pcbBoard_DragOver);
             this.pcbSeven.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pcbBoard_MouseDown);
             // 
@@ -133,6 +136,7 @@ namespace TicTacChess
             this.pcbSix.TabStop = false;
             this.pcbSix.Tag = "32";
             this.pcbSix.DragDrop += new System.Windows.Forms.DragEventHandler(this.pcbBoard_DragDrop);
+            this.pcbSix.DragEnter += new System.Windows.Forms.DragEventHandler(this.pcbBoard_DragEnter);
             this.pcbSix.DragOver += new System.Windows.Forms.DragEventHandler(this.pcbBoard_DragOver);
             this.pcbSix.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pcbBoard_MouseDown);
             // 
@@ -146,6 +150,7 @@ namespace TicTacChess
             this.pcbFive.TabStop = false;
             this.pcbFive.Tag = "22";
             this.pcbFive.DragDrop += new System.Windows.Forms.DragEventHandler(this.pcbBoard_DragDrop);
+            this.pcbFive.DragEnter += new System.Windows.Forms.DragEventHandler(this.pcbBoard_DragEnter);
             this.pcbFive.DragOver += new System.Windows.Forms.DragEventHandler(this.pcbBoard_DragOver);
             this.pcbFive.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pcbBoard_MouseDown);
             // 
@@ -159,6 +164,7 @@ namespace TicTacChess
             this.pcbFour.TabStop = false;
             this.pcbFour.Tag = "12";
             this.pcbFour.DragDrop += new System.Windows.Forms.DragEventHandler(this.pcbBoard_DragDrop);
+            this.pcbFour.DragEnter += new System.Windows.Forms.DragEventHandler(this.pcbBoard_DragEnter);
             this.pcbFour.DragOver += new System.Windows.Forms.DragEventHandler(this.pcbBoard_DragOver);
             this.pcbFour.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pcbBoard_MouseDown);
             // 
@@ -167,11 +173,12 @@ namespace TicTacChess
             this.pcbThree.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pcbThree.Location = new System.Drawing.Point(304, 21);
             this.pcbThree.Name = "pcbThree";
-            this.pcbThree.Size = new System.Drawing.Size(106, 99);
+            this.pcbThree.Size = new System.Drawing.Size(106, 100);
             this.pcbThree.TabIndex = 2;
             this.pcbThree.TabStop = false;
             this.pcbThree.Tag = "31";
             this.pcbThree.DragDrop += new System.Windows.Forms.DragEventHandler(this.pcbBoard_DragDrop);
+            this.pcbThree.DragEnter += new System.Windows.Forms.DragEventHandler(this.pcbBoard_DragEnter);
             this.pcbThree.DragOver += new System.Windows.Forms.DragEventHandler(this.pcbBoard_DragOver);
             this.pcbThree.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pcbBoard_MouseDown);
             // 
@@ -180,11 +187,12 @@ namespace TicTacChess
             this.pcbTwo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pcbTwo.Location = new System.Drawing.Point(184, 21);
             this.pcbTwo.Name = "pcbTwo";
-            this.pcbTwo.Size = new System.Drawing.Size(99, 99);
+            this.pcbTwo.Size = new System.Drawing.Size(99, 100);
             this.pcbTwo.TabIndex = 1;
             this.pcbTwo.TabStop = false;
             this.pcbTwo.Tag = "21";
             this.pcbTwo.DragDrop += new System.Windows.Forms.DragEventHandler(this.pcbBoard_DragDrop);
+            this.pcbTwo.DragEnter += new System.Windows.Forms.DragEventHandler(this.pcbBoard_DragEnter);
             this.pcbTwo.DragOver += new System.Windows.Forms.DragEventHandler(this.pcbBoard_DragOver);
             this.pcbTwo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pcbBoard_MouseDown);
             // 
@@ -193,25 +201,26 @@ namespace TicTacChess
             this.pcbOne.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pcbOne.Location = new System.Drawing.Point(55, 21);
             this.pcbOne.Name = "pcbOne";
-            this.pcbOne.Size = new System.Drawing.Size(108, 99);
+            this.pcbOne.Size = new System.Drawing.Size(108, 100);
             this.pcbOne.TabIndex = 0;
             this.pcbOne.TabStop = false;
             this.pcbOne.Tag = "11";
             this.pcbOne.DragDrop += new System.Windows.Forms.DragEventHandler(this.pcbBoard_DragDrop);
+            this.pcbOne.DragEnter += new System.Windows.Forms.DragEventHandler(this.pcbBoard_DragEnter);
             this.pcbOne.DragOver += new System.Windows.Forms.DragEventHandler(this.pcbBoard_DragOver);
             this.pcbOne.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pcbBoard_MouseDown);
             // 
-            // groupBox2
+            // gbxPieces
             // 
-            this.groupBox2.Controls.Add(this.pcbQueen);
-            this.groupBox2.Controls.Add(this.pcbRook);
-            this.groupBox2.Controls.Add(this.pcbKnight);
-            this.groupBox2.Location = new System.Drawing.Point(485, 87);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(134, 371);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Pieces";
+            this.gbxPieces.Controls.Add(this.pcbQueen);
+            this.gbxPieces.Controls.Add(this.pcbRook);
+            this.gbxPieces.Controls.Add(this.pcbKnight);
+            this.gbxPieces.Location = new System.Drawing.Point(485, 87);
+            this.gbxPieces.Name = "gbxPieces";
+            this.gbxPieces.Size = new System.Drawing.Size(134, 371);
+            this.gbxPieces.TabIndex = 1;
+            this.gbxPieces.TabStop = false;
+            this.gbxPieces.Text = "Pieces";
             // 
             // pcbQueen
             // 
@@ -241,7 +250,7 @@ namespace TicTacChess
             // 
             this.pcbKnight.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pcbKnight.Image = ((System.Drawing.Image)(resources.GetObject("pcbKnight.Image")));
-            this.pcbKnight.Location = new System.Drawing.Point(19, 21);
+            this.pcbKnight.Location = new System.Drawing.Point(19, 22);
             this.pcbKnight.Name = "pcbKnight";
             this.pcbKnight.Size = new System.Drawing.Size(99, 99);
             this.pcbKnight.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -304,7 +313,7 @@ namespace TicTacChess
             this.Controls.Add(this.rdbWhite);
             this.Controls.Add(this.btnRestart);
             this.Controls.Add(this.lblStatus);
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.gbxPieces);
             this.Controls.Add(this.gbxBoard);
             this.Name = "Form1";
             this.Text = "TicTacChess";
@@ -319,7 +328,7 @@ namespace TicTacChess
             ((System.ComponentModel.ISupportInitialize)(this.pcbThree)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbTwo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbOne)).EndInit();
-            this.groupBox2.ResumeLayout(false);
+            this.gbxPieces.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pcbQueen)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbRook)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbKnight)).EndInit();
@@ -340,7 +349,7 @@ namespace TicTacChess
         private System.Windows.Forms.PictureBox pcbThree;
         private System.Windows.Forms.PictureBox pcbTwo;
         private System.Windows.Forms.PictureBox pcbOne;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox gbxPieces;
         private System.Windows.Forms.PictureBox pcbQueen;
         private System.Windows.Forms.PictureBox pcbRook;
         private System.Windows.Forms.PictureBox pcbKnight;

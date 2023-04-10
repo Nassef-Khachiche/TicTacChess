@@ -23,6 +23,7 @@ namespace TicTacChess
         }
 
         // Gets
+        public string GetPictureName() { return pictureName; }
         public int GetHorizontal() { return horizontal; }
         public int GetVertical() { return vertiacal; }
         public Piece GetPiece() { return currentPiece; }
