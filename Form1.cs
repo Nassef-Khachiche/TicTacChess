@@ -38,6 +38,12 @@ namespace TicTacChess
         bool gameStart = false;
         string turnColor = "";
 
+        //Check winner
+        List<string> winlist = null;
+        string startingBlack = "012";
+        string startingWhite = "678";
+
+
 
         public Form1()
         {
@@ -64,7 +70,7 @@ namespace TicTacChess
         {
             pcbFrom = (PictureBox)sender;
 
-            if (pcbFrom.BackColor == Color.White)
+            if (pcbFrom.BackColor == Color.White && gameStart == true)
             {
                 horizontal = Convert.ToInt32(pcbFrom.Tag.ToString().Substring(0, 1));
                 vertical = Convert.ToInt32(pcbFrom.Tag.ToString().Substring(1, 1));
@@ -112,6 +118,8 @@ namespace TicTacChess
                 {
                     turnColor = "White";
                 }
+
+                CheckWinner();
             }
             else
             {
@@ -318,6 +326,7 @@ namespace TicTacChess
 
             UpdateBoardpieceOptions();
         }
+
         /* Setup Game */
         public void SetupGame()
         {
@@ -339,7 +348,71 @@ namespace TicTacChess
             boardList.Add(new Board(1, 3, "pcbSeven"));
             boardList.Add(new Board(2, 3, "pcbEight"));
             boardList.Add(new Board(3, 3, "pcbNine"));
+
+            winlist = new List<string>();
+            winlist.Add("012");
+            winlist.Add("345");
+            winlist.Add("678");
+            winlist.Add("036");
+            winlist.Add("147");
+            winlist.Add("258");
+            winlist.Add("246");
+            winlist.Add("048");
+
         }
+
+        /* check winner */
+        public void CheckWinner() 
+        {
+            string boardOne = "";
+            string boardTwo = "";
+            string boardThree = "";
+
+            int locOne, locTwo, locThree;
+
+            // Loops through all possible win options
+            foreach (string item in winlist)
+            {
+                locOne = Convert.ToInt32(item.Substring(0, 1));
+                locTwo = Convert.ToInt32(item.Substring(1, 1));
+                locThree = Convert.ToInt32(item.Substring(2, 1));
+
+                if (boardList[locOne].GetPiece() != null && boardList[locTwo].GetPiece() != null && boardList[locThree].GetPiece() != null)
+                {
+                    boardOne = boardList[Convert.ToInt32(item.Substring(0,1))].GetPiece().GetColor();
+                    boardTwo = boardList[Convert.ToInt32(item.Substring(1, 1))].GetPiece().GetColor();
+                    boardThree = boardList[Convert.ToInt32(item.Substring(2, 1))].GetPiece().GetColor();
+
+                    string endpoisitions = $"{locOne}{locTwo}{locThree}";
+
+                    if (endpoisitions == item)
+                    {
+                        if (boardOne == boardTwo && boardTwo == boardThree && boardOne != "" && boardTwo != "" && boardThree != "")
+                        {
+                            if (boardOne == "White")
+                            {
+                                if (endpoisitions != startingWhite)
+                                {
+                                    MessageBox.Show("White won");
+                                    SetupGame();
+                                }
+                            }
+                            else
+                            {
+                                if (endpoisitions != startingBlack)
+                                {
+                                    MessageBox.Show("Black won");
+                                    SetupGame();
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+
+        }
+
         /* Before calculating a pieceoptions the old ones have to be cleared */
         public void ResetBoardOptions()
         {
@@ -403,6 +476,73 @@ namespace TicTacChess
                     }
                 }
             }
+        }
+
+
+        /* useless functions */
+        public void UpdateStartingOptions() 
+        {
+            if (activePiece.GetColor() == "White")
+            {
+                startingWhite = GetStartingNumber(startingWhite);
+
+            }
+            else
+            {
+                startingBlack = GetStartingNumber(startingBlack);
+            }
+
+            if (startingBlack.Length == 3 && startingWhite.Length == 3)
+            {
+                Console.WriteLine($"{startingWhite}{startingBlack}");
+                lblStatus.Text = "Game starts, white begins.";
+                gameStart = true;
+                UpdateAllBoardColors();
+            }
+        }
+        public string GetStartingNumber(string currentStart) 
+        {
+            int newNumber = boardList.IndexOf(boardList.FirstOrDefault(f => f.GetPictureName() == pcbTo.Name));
+
+            //If startingWhite is empty the found index is the starting number
+            if (currentStart == "")
+            {
+                currentStart += newNumber;
+            }
+            else
+            {
+                //When there already is a current start this checks if the new number is higher (it orders the number from low to high) if (newNumber.ToString().Length == 1)
+                if (newNumber.ToString().Length == 1)
+                {
+                    if (newNumber > Convert.ToInt32(currentStart.Substring(0, 1)))
+                    {
+                        currentStart += newNumber;
+                    }
+                    else
+                    {
+                        currentStart = newNumber + currentStart;
+                    }
+                }
+                else if (newNumber.ToString().Length == 2)
+                {
+                    if (newNumber > Convert.ToInt32(currentStart.Substring(0, 1)))
+                    {
+                        if (newNumber > Convert.ToInt32(currentStart.Substring(1, 1)))
+                        {
+                            currentStart += newNumber;
+                        }
+                    }
+                    else
+                    {
+                        currentStart = currentStart.Substring(0, 1) + newNumber + currentStart.Substring(1, 1);
+                    }
+                }
+                else
+                {
+                    currentStart = newNumber + currentStart;
+                }
+            }
+            return currentStart;
         }
     }
 }
