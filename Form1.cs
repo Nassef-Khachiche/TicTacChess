@@ -138,6 +138,7 @@ namespace TicTacChess
 
             if (onBoardCount == 6)
             {
+                lblStatus.Text = "Game starts, white begins.";
                 onBoardCount++;
                 gameStart = true;
                 turnColor = "White";
@@ -193,6 +194,22 @@ namespace TicTacChess
             selectedPieceColor = "White";
             UpdatePieceColor();
             UpdatePieceOnBoardColors();
+        }
+        private void pcbBoard_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.Bitmap) && ((PictureBox)sender).BackColor == Color.Green)
+            {
+                e.Effect = DragDropEffects.Copy;
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+                UpdateAllBoardColors();
+            }
+        }
+        private void btnRestart_Click(object sender, EventArgs e)
+        {
+            Restart();
         }
 
         /* update staring position onnodig */
@@ -412,6 +429,61 @@ namespace TicTacChess
             }
 
         }
+        public void Restart()
+        {
+            // Selected Color
+            selectedPieceColor = "";
+
+            // The pictureboxes to use while moving pieces
+            pcbFrom = null;
+            pcbTo = null;
+
+            //Variables to move pieces
+            activePiece = null;
+            activeBoard = null;
+
+            pieceOptions = "";
+            horizontal = 0;
+            vertical = 0;
+            pbxForbidden = null;
+            forbidden = null;
+
+            // Move when its your turn
+            onBoardCount = 0;
+            gameStart = false;
+
+            //Check winner
+            winlist = null;
+            startingBlack = "012";
+            startingWhite = "678";
+
+            /* Start as white */
+            selectedPieceColor = "White";
+            turnColor = "White";
+            rdbWhite.Checked = true;
+
+            /* clear board */
+            foreach (PictureBox pb in gbxBoard.Controls.OfType<PictureBox>())
+            {
+                pb.Image = null;
+                lblStatus.Text = "Start game, Setup pieces";
+                pb.BackColor = Color.White;
+            }
+
+            /* clear pieces */
+            foreach (Piece item in pieceList)
+            {
+                foreach (PictureBox pb in gbxPieces.Controls.OfType<PictureBox>())
+                {
+                    if (item.GetBasePictureBoxName() == pb.Name && item.GetColor() == selectedPieceColor)
+                    {
+                        pb.BackColor = Color.White;
+                    }
+                }
+            }
+
+            SetupGame();
+        }
 
         /* Before calculating a pieceoptions the old ones have to be cleared */
         public void ResetBoardOptions()
@@ -443,19 +515,6 @@ namespace TicTacChess
                         }
                     }
                 }
-            }
-        }
-
-        private void pcbBoard_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.Bitmap) && ((PictureBox)sender).BackColor == Color.Green)
-            {
-                e.Effect = DragDropEffects.Copy;
-            }
-            else
-            {
-                e.Effect = DragDropEffects.None;
-                UpdateAllBoardColors();
             }
         }
 

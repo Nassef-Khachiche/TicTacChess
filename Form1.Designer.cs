@@ -278,6 +278,7 @@ namespace TicTacChess
             this.btnRestart.TabIndex = 3;
             this.btnRestart.Text = "Restart Game";
             this.btnRestart.UseVisualStyleBackColor = false;
+            this.btnRestart.Click += new System.EventHandler(this.btnRestart_Click);
             // 
             // rdbWhite
             // 
