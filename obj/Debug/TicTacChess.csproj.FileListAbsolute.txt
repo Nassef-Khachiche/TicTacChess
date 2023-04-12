@@ -8,3 +8,4 @@ C:\Users\nasse\source\repos\TicTacChess\TicTacChess\obj\Debug\TicTacChess.csproj
 C:\Users\nasse\source\repos\TicTacChess\TicTacChess\obj\Debug\TicTacChess.csproj.CoreCompileInputs.cache
 C:\Users\nasse\source\repos\TicTacChess\TicTacChess\obj\Debug\TicTacChess.exe
 C:\Users\nasse\source\repos\TicTacChess\TicTacChess\obj\Debug\TicTacChess.pdb
+C:\Users\nasse\source\repos\TicTacChess\TicTacChess\obj\Debug\TicTacChess.Form2.resources

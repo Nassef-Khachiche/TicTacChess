@@ -48,6 +48,7 @@ namespace TicTacChess
             this.btnRestart = new System.Windows.Forms.Button();
             this.rdbWhite = new System.Windows.Forms.RadioButton();
             this.rdbBlack = new System.Windows.Forms.RadioButton();
+            this.cbxArduino = new System.Windows.Forms.CheckBox();
             this.gbxBoard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbNine)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbEight)).BeginInit();
@@ -262,7 +263,7 @@ namespace TicTacChess
             // 
             this.lblStatus.AutoSize = true;
             this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.lblStatus.Location = new System.Drawing.Point(192, 32);
+            this.lblStatus.Location = new System.Drawing.Point(161, 52);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(197, 20);
             this.lblStatus.TabIndex = 2;
@@ -304,12 +305,24 @@ namespace TicTacChess
             this.rdbBlack.UseVisualStyleBackColor = true;
             this.rdbBlack.CheckedChanged += new System.EventHandler(this.rdbBlack_CheckedChanged);
             // 
+            // cbxArduino
+            // 
+            this.cbxArduino.AutoSize = true;
+            this.cbxArduino.Location = new System.Drawing.Point(165, 25);
+            this.cbxArduino.Name = "cbxArduino";
+            this.cbxArduino.Size = new System.Drawing.Size(79, 21);
+            this.cbxArduino.TabIndex = 6;
+            this.cbxArduino.Text = "Arduino";
+            this.cbxArduino.UseVisualStyleBackColor = true;
+            this.cbxArduino.CheckedChanged += new System.EventHandler(this.cbxArduino_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(631, 470);
+            this.Controls.Add(this.cbxArduino);
             this.Controls.Add(this.rdbBlack);
             this.Controls.Add(this.rdbWhite);
             this.Controls.Add(this.btnRestart);
@@ -358,6 +371,7 @@ namespace TicTacChess
         private System.Windows.Forms.Button btnRestart;
         private System.Windows.Forms.RadioButton rdbWhite;
         private System.Windows.Forms.RadioButton rdbBlack;
+        private System.Windows.Forms.CheckBox cbxArduino;
     }
 }
 

@@ -14,6 +14,10 @@ namespace TicTacChess
 {
     public partial class Form1 : Form
     {
+        // Arduino
+        Form2 arduinoForm = null;
+        bool arduinoOn = false; 
+
         // Selected Color
         string selectedPieceColor = "";
 
@@ -212,6 +216,21 @@ namespace TicTacChess
             Restart();
         }
 
+        private void cbxArduino_CheckedChanged(object sender, EventArgs e)
+        {
+            arduinoOn = cbxArduino.Checked;
+            if (arduinoOn)
+            {
+                arduinoForm = new Form2();
+                arduinoForm.Show();
+
+            }
+            else
+            {
+                arduinoForm.Close();
+            }
+        }
+
         /* update staring position onnodig */
         public void CheckForIllegalMoves()
         {
@@ -246,7 +265,6 @@ namespace TicTacChess
                 }
             }
         }
-
         private void CheckForNeighbour(Board neighbour, string direction) 
         {
             if (neighbour != null && neighbour.GetPiece() != null)
@@ -302,6 +320,8 @@ namespace TicTacChess
                 pcbRook.Image = Properties.Resources.black_rook;
                 pcbKnight.Image = Properties.Resources.black_knight;
             }
+
+            ResetBoardOptions();
         }
         public void UpdateBoardpieceOptions()
         {
@@ -410,7 +430,7 @@ namespace TicTacChess
                             {
                                 if (endpoisitions != startingWhite)
                                 {
-                                    MessageBox.Show("White won");
+                                    MessageBox.Show("White won", "Winner!", MessageBoxButtons.OK);
                                     SetupGame();
                                 }
                             }
@@ -418,7 +438,7 @@ namespace TicTacChess
                             {
                                 if (endpoisitions != startingBlack)
                                 {
-                                    MessageBox.Show("Black won");
+                                    MessageBox.Show("Black won", "Winner!", MessageBoxButtons.OK);
                                     SetupGame();
                                 }
                             }
@@ -429,6 +449,8 @@ namespace TicTacChess
             }
 
         }
+
+        /* Restart */
         public void Restart()
         {
             // Selected Color
@@ -485,6 +507,7 @@ namespace TicTacChess
             SetupGame();
         }
 
+
         /* Before calculating a pieceoptions the old ones have to be cleared */
         public void ResetBoardOptions()
         {
@@ -494,6 +517,7 @@ namespace TicTacChess
             }
         }
 
+        /* You can not have multiple of the same pieces */
         public void UpdatePieceOnBoardColors()
         {
             if (pieceList != null)
@@ -537,7 +561,7 @@ namespace TicTacChess
             }
         }
 
-
+        #region Useless Functions
         /* useless functions */
         public void UpdateStartingOptions() 
         {
@@ -559,6 +583,7 @@ namespace TicTacChess
                 UpdateAllBoardColors();
             }
         }
+
         public string GetStartingNumber(string currentStart) 
         {
             int newNumber = boardList.IndexOf(boardList.FirstOrDefault(f => f.GetPictureName() == pcbTo.Name));
@@ -603,5 +628,8 @@ namespace TicTacChess
             }
             return currentStart;
         }
+
+        #endregion
+
     }
 }
