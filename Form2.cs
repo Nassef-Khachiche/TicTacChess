@@ -17,11 +17,13 @@ namespace TicTacChess
         private delegate void SafeCallDelegate();
         String receivedString = "";
         String receivedStringLast = "";
+        Form1 mainForm = null;
 
         string sendCommando = "";
-        public Form2()
+        public Form2(Form1 main)
         {
             InitializeComponent();
+            mainForm = main;
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -183,16 +185,20 @@ namespace TicTacChess
                 }
             }
         }
-        public string ReadArduino()
-        {
-            if (receivedString != receivedStringLast)
-            {
-                PrintLn(receivedString, "G");
-            }
-            receivedStringLast = receivedString;
 
-            return receivedString;
-        }
+
+        /* Unused function */
+        //public string ReadArduino()
+        //{
+        //    if (receivedString != receivedStringLast)
+        //    {
+        //        PrintLn(receivedString, "G");
+        //    }
+        //    receivedStringLast = receivedString;
+
+        //    return receivedString;
+        //}
+
         #endregion
 
         private void btnSendMessage_Click(object sender, EventArgs e)
@@ -220,6 +226,44 @@ namespace TicTacChess
         private void btnZeroAll_Click(object sender, EventArgs e)
         {
             WriteArduino("ZS:0");
+        }
+
+        private void rtbLogging_TextChanged(object sender, EventArgs e)
+        {
+            //Console.WriteLine(mainForm.moveArduinoCounter);
+            int totalLines = rtbLogging.Lines.Length;
+            string lastLine = rtbLogging.Lines[totalLines - 2]; // last line out
+
+            if (lastLine.Contains("VS:Ready"))
+            {
+                // vertical ready
+                mainForm.NextArduinoStep();
+            }
+            if (lastLine.Contains("HS:Ready"))
+            {
+                // horizontal ready
+                mainForm.NextArduinoStep();
+            }
+            if (lastLine.Contains("RS:Ready"))
+            {
+                // rotation ready
+                mainForm.NextArduinoStep();
+            }
+            if (lastLine.Contains("CS:Ready"))
+            {
+                // compressor ready
+                mainForm.NextArduinoStep();
+            }
+            if (lastLine.Contains("SS:Ready"))
+            {
+                // suction ready
+                mainForm.NextArduinoStep();
+            }
+            if (lastLine.Contains("Ready-LT"))
+            {
+                // message for all zeros
+                mainForm.NextArduinoStep();
+            }
         }
     }
 }

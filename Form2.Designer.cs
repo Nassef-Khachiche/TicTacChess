@@ -56,10 +56,10 @@ namespace TicTacChess
             this.gbxConnectionDkal.Controls.Add(this.btnScanPortsDkal);
             this.gbxConnectionDkal.Controls.Add(this.cbbSerialPortsDkal);
             this.gbxConnectionDkal.Controls.Add(this.btnSerialPortOpenDkal);
-            this.gbxConnectionDkal.Location = new System.Drawing.Point(16, 15);
-            this.gbxConnectionDkal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbxConnectionDkal.Location = new System.Drawing.Point(13, 13);
+            this.gbxConnectionDkal.Margin = new System.Windows.Forms.Padding(4);
             this.gbxConnectionDkal.Name = "gbxConnectionDkal";
-            this.gbxConnectionDkal.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbxConnectionDkal.Padding = new System.Windows.Forms.Padding(4);
             this.gbxConnectionDkal.Size = new System.Drawing.Size(191, 133);
             this.gbxConnectionDkal.TabIndex = 28;
             this.gbxConnectionDkal.TabStop = false;
@@ -89,7 +89,7 @@ namespace TicTacChess
             // btnScanPortsDkal
             // 
             this.btnScanPortsDkal.Location = new System.Drawing.Point(12, 23);
-            this.btnScanPortsDkal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnScanPortsDkal.Margin = new System.Windows.Forms.Padding(4);
             this.btnScanPortsDkal.Name = "btnScanPortsDkal";
             this.btnScanPortsDkal.Size = new System.Drawing.Size(171, 28);
             this.btnScanPortsDkal.TabIndex = 3;
@@ -101,7 +101,7 @@ namespace TicTacChess
             // 
             this.cbbSerialPortsDkal.FormattingEnabled = true;
             this.cbbSerialPortsDkal.Location = new System.Drawing.Point(55, 63);
-            this.cbbSerialPortsDkal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbbSerialPortsDkal.Margin = new System.Windows.Forms.Padding(4);
             this.cbbSerialPortsDkal.Name = "cbbSerialPortsDkal";
             this.cbbSerialPortsDkal.Size = new System.Drawing.Size(123, 24);
             this.cbbSerialPortsDkal.TabIndex = 2;
@@ -111,7 +111,7 @@ namespace TicTacChess
             // 
             this.btnSerialPortOpenDkal.Enabled = false;
             this.btnSerialPortOpenDkal.Location = new System.Drawing.Point(16, 96);
-            this.btnSerialPortOpenDkal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSerialPortOpenDkal.Margin = new System.Windows.Forms.Padding(4);
             this.btnSerialPortOpenDkal.Name = "btnSerialPortOpenDkal";
             this.btnSerialPortOpenDkal.Size = new System.Drawing.Size(167, 28);
             this.btnSerialPortOpenDkal.TabIndex = 6;
@@ -122,10 +122,10 @@ namespace TicTacChess
             // gbxLoggingDkal
             // 
             this.gbxLoggingDkal.Controls.Add(this.rtbLogging);
-            this.gbxLoggingDkal.Location = new System.Drawing.Point(215, 15);
-            this.gbxLoggingDkal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbxLoggingDkal.Location = new System.Drawing.Point(212, 13);
+            this.gbxLoggingDkal.Margin = new System.Windows.Forms.Padding(4);
             this.gbxLoggingDkal.Name = "gbxLoggingDkal";
-            this.gbxLoggingDkal.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbxLoggingDkal.Padding = new System.Windows.Forms.Padding(4);
             this.gbxLoggingDkal.Size = new System.Drawing.Size(557, 133);
             this.gbxLoggingDkal.TabIndex = 29;
             this.gbxLoggingDkal.TabStop = false;
@@ -135,12 +135,13 @@ namespace TicTacChess
             // 
             this.rtbLogging.BackColor = System.Drawing.Color.White;
             this.rtbLogging.Location = new System.Drawing.Point(8, 23);
-            this.rtbLogging.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rtbLogging.Margin = new System.Windows.Forms.Padding(4);
             this.rtbLogging.Name = "rtbLogging";
             this.rtbLogging.Size = new System.Drawing.Size(540, 100);
             this.rtbLogging.TabIndex = 0;
             this.rtbLogging.Text = "";
             this.rtbLogging.WordWrap = false;
+            this.rtbLogging.TextChanged += new System.EventHandler(this.rtbLogging_TextChanged);
             // 
             // serialPortArduinoConnection
             // 
@@ -156,10 +157,10 @@ namespace TicTacChess
             this.gbxSend.Controls.Add(this.btnZeroAll);
             this.gbxSend.Controls.Add(this.btnSendMessage);
             this.gbxSend.Controls.Add(this.txbSendMessage);
-            this.gbxSend.Location = new System.Drawing.Point(16, 155);
-            this.gbxSend.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbxSend.Location = new System.Drawing.Point(13, 153);
+            this.gbxSend.Margin = new System.Windows.Forms.Padding(4);
             this.gbxSend.Name = "gbxSend";
-            this.gbxSend.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbxSend.Padding = new System.Windows.Forms.Padding(4);
             this.gbxSend.Size = new System.Drawing.Size(756, 57);
             this.gbxSend.TabIndex = 30;
             this.gbxSend.TabStop = false;
@@ -168,7 +169,7 @@ namespace TicTacChess
             // btnPossibleMessages
             // 
             this.btnPossibleMessages.Location = new System.Drawing.Point(368, 18);
-            this.btnPossibleMessages.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnPossibleMessages.Margin = new System.Windows.Forms.Padding(4);
             this.btnPossibleMessages.Name = "btnPossibleMessages";
             this.btnPossibleMessages.Size = new System.Drawing.Size(184, 30);
             this.btnPossibleMessages.TabIndex = 3;
@@ -180,7 +181,7 @@ namespace TicTacChess
             // 
             this.btnZeroAll.Enabled = false;
             this.btnZeroAll.Location = new System.Drawing.Point(560, 18);
-            this.btnZeroAll.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnZeroAll.Margin = new System.Windows.Forms.Padding(4);
             this.btnZeroAll.Name = "btnZeroAll";
             this.btnZeroAll.Size = new System.Drawing.Size(184, 30);
             this.btnZeroAll.TabIndex = 2;
@@ -192,7 +193,7 @@ namespace TicTacChess
             // 
             this.btnSendMessage.Enabled = false;
             this.btnSendMessage.Location = new System.Drawing.Point(16, 20);
-            this.btnSendMessage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSendMessage.Margin = new System.Windows.Forms.Padding(4);
             this.btnSendMessage.Name = "btnSendMessage";
             this.btnSendMessage.Size = new System.Drawing.Size(184, 30);
             this.btnSendMessage.TabIndex = 1;
@@ -204,7 +205,7 @@ namespace TicTacChess
             // 
             this.txbSendMessage.Enabled = false;
             this.txbSendMessage.Location = new System.Drawing.Point(208, 23);
-            this.txbSendMessage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txbSendMessage.Margin = new System.Windows.Forms.Padding(4);
             this.txbSendMessage.Name = "txbSendMessage";
             this.txbSendMessage.Size = new System.Drawing.Size(132, 22);
             this.txbSendMessage.TabIndex = 0;
@@ -213,11 +214,11 @@ namespace TicTacChess
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(776, 226);
+            this.ClientSize = new System.Drawing.Size(785, 226);
             this.Controls.Add(this.gbxSend);
             this.Controls.Add(this.gbxConnectionDkal);
             this.Controls.Add(this.gbxLoggingDkal);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form2";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form2_Load);

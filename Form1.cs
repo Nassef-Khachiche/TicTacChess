@@ -16,7 +16,16 @@ namespace TicTacChess
     {
         // Arduino
         Form2 arduinoForm = null;
-        bool arduinoOn = false; 
+        bool arduinoOn = false;
+        public int moveArduinoCounter = 0;
+        bool moveBusy = false;
+        string commando = "";
+
+        Board oldBoard = null;
+        Board newBoard = null;
+
+
+
 
         // Selected Color
         string selectedPieceColor = "";
@@ -80,6 +89,7 @@ namespace TicTacChess
                 vertical = Convert.ToInt32(pcbFrom.Tag.ToString().Substring(1, 1));
 
                 activeBoard = boardList.FirstOrDefault(x => x.GetHorizontal() == horizontal && x.GetVertical() == vertical);
+                oldBoard = activeBoard;
                 activePiece = activeBoard.GetPiece();
 
 
@@ -112,6 +122,7 @@ namespace TicTacChess
                 activeBoard = boardList.FirstOrDefault(x => x.GetHorizontal() == horizontal && x.GetVertical() == vertical);
                 activePiece.SetCurrentPictureBox(pcbTo.Name);
                 activeBoard.SetPiece(activePiece);
+                newBoard = activeBoard;
                 pcbFrom.Image = null;
 
                 if (turnColor == "White")
@@ -121,6 +132,11 @@ namespace TicTacChess
                 else
                 {
                     turnColor = "White";
+                }
+
+                if (cbxArduino.Checked == true)
+                {
+                    tmrArduino.Start();
                 }
 
                 CheckWinner();
@@ -148,6 +164,9 @@ namespace TicTacChess
                 turnColor = "White";
             }
             UpdateAllBoardColors();
+
+            /* Resetting the move counter */
+            moveArduinoCounter = 0;
         }
 
         private void pcbBoard_DragOver(object sender, DragEventArgs e)
@@ -165,8 +184,6 @@ namespace TicTacChess
 
         private void pcbAllPieces_MouseDown(object sender, MouseEventArgs e)
         {
-            /* ClearBoardCalls moet niet !!!*/
-
             activeBoard = null;
             pcbFrom = (PictureBox)sender;
             if (pcbFrom.BackColor == Color.White)
@@ -221,7 +238,7 @@ namespace TicTacChess
             arduinoOn = cbxArduino.Checked;
             if (arduinoOn)
             {
-                arduinoForm = new Form2();
+                arduinoForm = new Form2(this);
                 arduinoForm.Show();
 
             }
@@ -376,15 +393,15 @@ namespace TicTacChess
             pieceList.Add(new Piece("Queen", "Black"));
 
             boardList = new List<Board>();
-            boardList.Add(new Board(1, 1, "pcbOne"));
-            boardList.Add(new Board(2, 1, "pcbTwo"));
-            boardList.Add(new Board(3, 1, "pcbThree"));
-            boardList.Add(new Board(1, 2, "pcbFour"));
-            boardList.Add(new Board(2, 2, "pcbFive"));
-            boardList.Add(new Board(3, 2, "pcbSix"));
-            boardList.Add(new Board(1, 3, "pcbSeven"));
-            boardList.Add(new Board(2, 3, "pcbEight"));
-            boardList.Add(new Board(3, 3, "pcbNine"));
+            boardList.Add(new Board(1, 1, "pcbOne", 320, 20));
+            boardList.Add(new Board(2, 1, "pcbTwo", 400, 135));
+            boardList.Add(new Board(3, 1, "pcbThree", 570, 245));
+            boardList.Add(new Board(1, 2, "pcbFour", 850, 0));
+            boardList.Add(new Board(2, 2, "pcbFive", 900, 110));
+            boardList.Add(new Board(3, 2, "pcbSix", 1050, 200));
+            boardList.Add(new Board(1, 3, "pcbSeven", 1330, 0));
+            boardList.Add(new Board(2, 3, "pcbEight", 1400, 95));
+            boardList.Add(new Board(3, 3, "pcbNine", 1520, 175));
 
             winlist = new List<string>();
             winlist.Add("012");
@@ -395,7 +412,6 @@ namespace TicTacChess
             winlist.Add("258");
             winlist.Add("246");
             winlist.Add("048");
-
         }
 
         /* check winner */
@@ -628,8 +644,87 @@ namespace TicTacChess
             }
             return currentStart;
         }
-
         #endregion
 
+        public void NextArduinoStep()
+        {
+            moveArduinoCounter++;
+            moveBusy = false;
+        }
+
+        private void tmrArduino_Tick(object sender, EventArgs e)
+        {
+            lblStatus.Text = "Arduino is busy";
+
+            if (moveArduinoCounter == 0)
+            {
+                commando = $"RS:{oldBoard.GetArduinoRot()}";
+            }
+            else if (moveArduinoCounter == 1)
+            {
+                commando = $"HS:{oldBoard.GetArduinoHor()}";
+            }
+            else if (moveArduinoCounter == 2)
+            {
+                commando = $"VS:{oldBoard.GetArduinoVer()}";
+            }
+            else if (moveArduinoCounter == 3)
+            {
+                commando = $"CS:1";
+            }
+            else if (moveArduinoCounter == 4)
+            {
+                commando = $"SS:1";
+            }
+            else if (moveArduinoCounter == 5)
+            {
+                commando = $"VS:{850}";
+            }
+            else if (moveArduinoCounter == 6)
+            {
+                commando = $"RS:{newBoard.GetArduinoRot()}";
+            }
+            else if (moveArduinoCounter == 7)
+            {
+                commando = $"HS:{newBoard.GetArduinoHor()}";
+            }
+            /*            else if (moveArduinoCounter == 8)
+                        {
+                            commando = $"VS:1150";
+                        }*/
+            else if (moveArduinoCounter == 8)
+            {
+                commando = $"SS:0";
+            }
+            else if (moveArduinoCounter == 9)
+            {
+                commando = $"CS:0";
+            }
+            else if (moveArduinoCounter == 10)
+            {
+                commando = $"ZS:3";
+            }
+            else if (moveArduinoCounter == 11)
+            {
+                commando = $"ZS:2";
+            }
+            else if (moveArduinoCounter == 12)
+            {
+                commando = $"ZS:1";
+            }
+            else if (moveArduinoCounter == 13)
+            {
+                tmrArduino.Enabled = false;
+                UpdateAllBoardColors();
+                gameStart = true;
+                CheckWinner();
+            }
+
+            if (moveBusy == false)
+            {
+                moveBusy = true;
+                arduinoForm.WriteArduino(commando);
+            }
+        }
     }
 }

@@ -29,6 +29,7 @@ namespace TicTacChess
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.gbxBoard = new System.Windows.Forms.GroupBox();
             this.pcbNine = new System.Windows.Forms.PictureBox();
@@ -49,6 +50,7 @@ namespace TicTacChess
             this.rdbWhite = new System.Windows.Forms.RadioButton();
             this.rdbBlack = new System.Windows.Forms.RadioButton();
             this.cbxArduino = new System.Windows.Forms.CheckBox();
+            this.tmrArduino = new System.Windows.Forms.Timer(this.components);
             this.gbxBoard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbNine)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbEight)).BeginInit();
@@ -316,6 +318,10 @@ namespace TicTacChess
             this.cbxArduino.UseVisualStyleBackColor = true;
             this.cbxArduino.CheckedChanged += new System.EventHandler(this.cbxArduino_CheckedChanged);
             // 
+            // tmrArduino
+            // 
+            this.tmrArduino.Tick += new System.EventHandler(this.tmrArduino_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -372,6 +378,7 @@ namespace TicTacChess
         private System.Windows.Forms.RadioButton rdbWhite;
         private System.Windows.Forms.RadioButton rdbBlack;
         private System.Windows.Forms.CheckBox cbxArduino;
+        private System.Windows.Forms.Timer tmrArduino;
     }
 }
 
