@@ -121,19 +121,31 @@
   <data name="black_knight" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\black_knight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="white_knight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\white_knight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="white_rook" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\white_rook.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="black_queen" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\black_queen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="black_rook" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\black_rook.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="white_knight" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\white_knight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="white_queen" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\white_queen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="white_rook" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\white_rook.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="black_king" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\black_king1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="black_wizard" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\black_wizard1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="white_king" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\white_king1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="white_wizard" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\white_wizard1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

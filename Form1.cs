@@ -14,7 +14,8 @@ namespace TicTacChess
 {
     public partial class Form1 : Form
     {
-        // Arduino
+        #region Arduino Varibles
+        /* Arduino */
         Form2 arduinoForm = null;
         bool arduinoOn = false;
         public int moveArduinoCounter = 0;
@@ -23,18 +24,17 @@ namespace TicTacChess
 
         Board oldBoard = null;
         Board newBoard = null;
+        #endregion
 
-
-
-
-        // Selected Color
+        #region Form Vairables
+        /* Selected Color */
         string selectedPieceColor = "";
 
-        // The pictureboxes to use while moving pieces
+        /* The pictureboxes to use while moving pieces*/
         PictureBox pcbFrom = null;
         PictureBox pcbTo = null;
 
-        //Variables to move pieces
+        /* Variables to move pieces */
         List<Piece> pieceList = null;
         Piece activePiece = null;
 
@@ -46,17 +46,16 @@ namespace TicTacChess
         PictureBox pbxForbidden;
         Board forbidden;
 
-        // Move when its your turn
+        /* Move when its your turn */
         int onBoardCount = 0;
         bool gameStart = false;
         string turnColor = "";
 
-        //Check winner
+        /* Check winner */
         List<string> winlist = null;
         string startingBlack = "012";
         string startingWhite = "678";
-
-
+        #endregion
 
         public Form1()
         {
@@ -97,6 +96,9 @@ namespace TicTacChess
                 ResetBoardOptions();
                 UpdateBoardpieceOptions();
 
+                /* wizard move check */
+                GetWizardMoveOptions();
+
                 CheckForIllegalMoves();
 
                 if (pcbFrom.Image != null)
@@ -105,10 +107,10 @@ namespace TicTacChess
                 }
             }
         }
-
         private void pcbBoard_DragDrop(object sender, DragEventArgs e)
         {
             pcbTo = (PictureBox)sender;
+
             Image getPicture = (Bitmap)e.Data.GetData(DataFormats.Bitmap);
             pcbTo.Image = getPicture;
             pcbTo.BackColor = Color.Transparent;
@@ -122,9 +124,11 @@ namespace TicTacChess
                 activeBoard = boardList.FirstOrDefault(x => x.GetHorizontal() == horizontal && x.GetVertical() == vertical);
                 activePiece.SetCurrentPictureBox(pcbTo.Name);
                 activeBoard.SetPiece(activePiece);
+
                 newBoard = activeBoard;
                 pcbFrom.Image = null;
 
+                /* Change turn color */
                 if (turnColor == "White")
                 {
                     turnColor = "Black";
@@ -143,7 +147,7 @@ namespace TicTacChess
             }
             else
             {
-                // Pieces area to the board
+                /* Dragging pieces to the board */
                 activePiece.SetCurrentPictureBox(pcbTo.Name);
                 boardList.FirstOrDefault(x => x.GetHorizontal() == horizontal && x.GetVertical() == vertical).SetPiece(activePiece);
 
@@ -156,19 +160,23 @@ namespace TicTacChess
             ResetBoardOptions();
             UpdatePieceOnBoardColors();
 
+            /* Game starts after counting 6 pieces on the board */
             if (onBoardCount == 6)
             {
-                lblStatus.Text = "Game starts, white begins.";
+                rdbBlack.Enabled = false;
+                rdbWhite.Enabled = false;
+
+                lblStatus.Text = "Game starts, white begins";
                 onBoardCount++;
                 gameStart = true;
                 turnColor = "White";
             }
+
             UpdateAllBoardColors();
 
             /* Resetting the move counter */
             moveArduinoCounter = 0;
         }
-
         private void pcbBoard_DragOver(object sender, DragEventArgs e)
         {
             pcbTo = (PictureBox)sender;
@@ -181,7 +189,6 @@ namespace TicTacChess
                 e.Effect = DragDropEffects.None;
             }
         }
-
         private void pcbAllPieces_MouseDown(object sender, MouseEventArgs e)
         {
             activeBoard = null;
@@ -202,14 +209,12 @@ namespace TicTacChess
                 pcbFrom.DoDragDrop(pcbFrom.Image, DragDropEffects.Copy);
             }
         }
-
         private void rdbBlack_CheckedChanged(object sender, EventArgs e)
         {
             selectedPieceColor = "Black";
             UpdatePieceColor();
             UpdatePieceOnBoardColors();
         }
-
         private void rdbWhite_CheckedChanged(object sender, EventArgs e)
         {
             selectedPieceColor = "White";
@@ -232,7 +237,6 @@ namespace TicTacChess
         {
             Restart();
         }
-
         private void cbxArduino_CheckedChanged(object sender, EventArgs e)
         {
             arduinoOn = cbxArduino.Checked;
@@ -247,8 +251,79 @@ namespace TicTacChess
                 arduinoForm.Close();
             }
         }
+        private void tmrArduino_Tick(object sender, EventArgs e)
+        {
+            lblStatus.Text = "Arduino is busy";
 
-        /* update staring position onnodig */
+            if (moveArduinoCounter == 0)
+            {
+                commando = $"RS:{oldBoard.GetArduinoRot()}";
+            }
+            else if (moveArduinoCounter == 1)
+            {
+                commando = $"HS:{oldBoard.GetArduinoHor()}";
+            }
+            else if (moveArduinoCounter == 2)
+            {
+                commando = $"VS:{oldBoard.GetArduinoVer()}";
+            }
+            else if (moveArduinoCounter == 3)
+            {
+                commando = $"CS:1";
+            }
+            else if (moveArduinoCounter == 4)
+            {
+                commando = $"SS:1";
+            }
+            else if (moveArduinoCounter == 5)
+            {
+                /* hardcoded 85- because it is always 850 */
+                commando = $"VS:{850}";
+            }
+            else if (moveArduinoCounter == 6)
+            {
+                commando = $"RS:{newBoard.GetArduinoRot()}";
+            }
+            else if (moveArduinoCounter == 7)
+            {
+                commando = $"HS:{newBoard.GetArduinoHor()}";
+            }
+            else if (moveArduinoCounter == 8)
+            {
+                commando = $"SS:0";
+            }
+            else if (moveArduinoCounter == 9)
+            {
+                commando = $"CS:0";
+            }
+            else if (moveArduinoCounter == 10)
+            {
+                commando = $"ZS:3";
+            }
+            else if (moveArduinoCounter == 11)
+            {
+                commando = $"ZS:2";
+            }
+            else if (moveArduinoCounter == 12)
+            {
+                commando = $"ZS:1";
+            }
+            else if (moveArduinoCounter == 13)
+            {
+                tmrArduino.Enabled = false;
+                UpdateAllBoardColors();
+                gameStart = true;
+                CheckWinner();
+            }
+
+            if (moveBusy == false)
+            {
+                moveBusy = true;
+                arduinoForm.WriteArduino(commando);
+            }
+        }
+
+        #region Move validation
         public void CheckForIllegalMoves()
         {
             Board right = boardList.FirstOrDefault(x => x.GetHorizontal() == activeBoard.GetHorizontal() + 1 && x.GetVertical() == activeBoard.GetVertical());
@@ -259,7 +334,7 @@ namespace TicTacChess
 
             if (activePiece != null)
             {
-                if (activePiece.GetName() == "Rook" || activePiece.GetName() == "Queen")
+                if (activePiece.GetName() == "Rook" || activePiece.GetName() == "Queen" || activePiece.GetName() == "King")
                 {
                     CheckForNeighbour(right, "Right");
                     CheckForNeighbour(left, "Left");
@@ -268,7 +343,7 @@ namespace TicTacChess
 
                 }
 
-                if (activePiece.GetName() == "Queen")
+                if (activePiece.GetName() == "Queen" || activePiece.GetName() == "King")
                 {
                     Board upRight = boardList.FirstOrDefault(x => x.GetHorizontal() == activeBoard.GetHorizontal() + 1 && x.GetVertical() == activeBoard.GetVertical() - 1);
                     Board upLeft = boardList.FirstOrDefault(x => x.GetHorizontal() == activeBoard.GetHorizontal() - 1 && x.GetVertical() == activeBoard.GetVertical() - 1);
@@ -282,7 +357,7 @@ namespace TicTacChess
                 }
             }
         }
-        private void CheckForNeighbour(Board neighbour, string direction) 
+        private void CheckForNeighbour(Board neighbour, string direction)
         {
             if (neighbour != null && neighbour.GetPiece() != null)
             {
@@ -323,39 +398,6 @@ namespace TicTacChess
                 pbxForbidden.BackColor = Color.White;
             }
         }
-        public void UpdatePieceColor()
-        {
-            if (selectedPieceColor == "White")
-            {
-                pcbKnight.Image = Properties.Resources.white_knight;
-                pcbQueen.Image = Properties.Resources.white_queen;
-                pcbRook.Image = Properties.Resources.white_rook;
-            }
-            else if (selectedPieceColor == "Black")
-            {
-                pcbQueen.Image = Properties.Resources.black_queen;
-                pcbRook.Image = Properties.Resources.black_rook;
-                pcbKnight.Image = Properties.Resources.black_knight;
-            }
-
-            ResetBoardOptions();
-        }
-        public void UpdateBoardpieceOptions()
-        {
-
-            for (int i = 0; i < pieceOptions.Length; i += 2)
-            {
-                foreach (PictureBox pb in gbxBoard.Controls.OfType<PictureBox>())
-                {
-                    if (pb.Tag?.ToString() == pieceOptions[i].ToString() + pieceOptions[i + 1].ToString() && pb.Image == null)
-                    {
-                        pb.BackColor = Color.Green;
-                    }
-
-                }
-            }
-
-        }
         public void GetBoardOptions()
         {
             pieceOptions = "";
@@ -367,28 +409,24 @@ namespace TicTacChess
                 }
             }
         }
-        public void GetStartingOptions()
-        {
-            if (selectedPieceColor == "White")
-            {
-                pieceOptions = "132333";
-            }
-            else
-            {
-                pieceOptions = "112131";
-            }
+        #endregion
 
-            UpdateBoardpieceOptions();
-        }
-
+        #region Game events
         /* Setup Game */
         public void SetupGame()
         {
             pieceList = new List<Piece>();
+            /* white */
             pieceList.Add(new Piece("Rook", "White"));
             pieceList.Add(new Piece("Knight", "White"));
             pieceList.Add(new Piece("Queen", "White"));
+            pieceList.Add(new Piece("Wizard", "White"));
+            pieceList.Add(new Piece("King", "White"));
+
+            /* black */
             pieceList.Add(new Piece("Rook", "Black"));
+            pieceList.Add(new Piece("Wizard", "Black"));
+            pieceList.Add(new Piece("King", "Black"));
             pieceList.Add(new Piece("Knight", "Black"));
             pieceList.Add(new Piece("Queen", "Black"));
 
@@ -423,7 +461,7 @@ namespace TicTacChess
 
             int locOne, locTwo, locThree;
 
-            // Loops through all possible win options
+            /* Loops through all possible win options*/
             foreach (string item in winlist)
             {
                 locOne = Convert.ToInt32(item.Substring(0, 1));
@@ -469,14 +507,18 @@ namespace TicTacChess
         /* Restart */
         public void Restart()
         {
-            // Selected Color
+            /* reset the disabled inputs */
+            rdbBlack.Enabled = true;
+            rdbWhite.Enabled = true;
+
+            /* Selected Color */
             selectedPieceColor = "";
 
-            // The pictureboxes to use while moving pieces
+            /* The pictureboxes to use while moving pieces */
             pcbFrom = null;
             pcbTo = null;
 
-            //Variables to move pieces
+            /* Variables to move pieces */
             activePiece = null;
             activeBoard = null;
 
@@ -486,11 +528,11 @@ namespace TicTacChess
             pbxForbidden = null;
             forbidden = null;
 
-            // Move when its your turn
+            /*  Move when its your turn */
             onBoardCount = 0;
             gameStart = false;
 
-            //Check winner
+            /* Check winner */
             winlist = null;
             startingBlack = "012";
             startingWhite = "678";
@@ -523,6 +565,64 @@ namespace TicTacChess
             SetupGame();
         }
 
+        /* starting options */
+        public void GetStartingOptions()
+        {
+            if (selectedPieceColor == "White")
+            {
+                pieceOptions = "132333";
+            }
+            else
+            {
+                pieceOptions = "112131";
+            }
+
+            UpdateBoardpieceOptions();
+        }
+
+        /* change color */
+        public void UpdatePieceColor()
+        {
+            if (selectedPieceColor == "White")
+            {
+                pcbKing.Image = Properties.Resources.white_king;
+                pcbWizard.Image = Properties.Resources.white_wizard;
+                pcbKnight.Image = Properties.Resources.white_knight;
+                pcbQueen.Image = Properties.Resources.white_queen;
+                pcbRook.Image = Properties.Resources.white_rook;
+            }
+            else if (selectedPieceColor == "Black")
+            {
+                pcbKing.Image = Properties.Resources.black_king;
+                pcbWizard.Image = Properties.Resources.black_wizard;
+                pcbQueen.Image = Properties.Resources.black_queen;
+                pcbRook.Image = Properties.Resources.black_rook;
+                pcbKnight.Image = Properties.Resources.black_knight;
+            }
+
+            ResetBoardOptions();
+        }
+        #endregion
+
+        #region Update move
+
+        /* Show all possible places to go to */
+        public void UpdateBoardpieceOptions()
+        {
+
+            for (int i = 0; i < pieceOptions.Length; i += 2)
+            {
+                foreach (PictureBox pb in gbxBoard.Controls.OfType<PictureBox>())
+                {
+                    if (pb.Tag?.ToString() == pieceOptions[i].ToString() + pieceOptions[i + 1].ToString() && pb.Image == null)
+                    {
+                        pb.BackColor = Color.Green;
+                    }
+
+                }
+            }
+
+        }
 
         /* Before calculating a pieceoptions the old ones have to be cleared */
         public void ResetBoardOptions()
@@ -558,6 +658,7 @@ namespace TicTacChess
             }
         }
 
+        /* Loop trough all the board pieces and handle the turns */
         public void UpdateAllBoardColors() 
         {
             foreach (PictureBox pb in gbxBoard.Controls.OfType<PictureBox>())
@@ -576,155 +677,32 @@ namespace TicTacChess
                 }
             }
         }
-
-        #region Useless Functions
-        /* useless functions */
-        public void UpdateStartingOptions() 
-        {
-            if (activePiece.GetColor() == "White")
-            {
-                startingWhite = GetStartingNumber(startingWhite);
-
-            }
-            else
-            {
-                startingBlack = GetStartingNumber(startingBlack);
-            }
-
-            if (startingBlack.Length == 3 && startingWhite.Length == 3)
-            {
-                Console.WriteLine($"{startingWhite}{startingBlack}");
-                lblStatus.Text = "Game starts, white begins.";
-                gameStart = true;
-                UpdateAllBoardColors();
-            }
-        }
-
-        public string GetStartingNumber(string currentStart) 
-        {
-            int newNumber = boardList.IndexOf(boardList.FirstOrDefault(f => f.GetPictureName() == pcbTo.Name));
-
-            //If startingWhite is empty the found index is the starting number
-            if (currentStart == "")
-            {
-                currentStart += newNumber;
-            }
-            else
-            {
-                //When there already is a current start this checks if the new number is higher (it orders the number from low to high) if (newNumber.ToString().Length == 1)
-                if (newNumber.ToString().Length == 1)
-                {
-                    if (newNumber > Convert.ToInt32(currentStart.Substring(0, 1)))
-                    {
-                        currentStart += newNumber;
-                    }
-                    else
-                    {
-                        currentStart = newNumber + currentStart;
-                    }
-                }
-                else if (newNumber.ToString().Length == 2)
-                {
-                    if (newNumber > Convert.ToInt32(currentStart.Substring(0, 1)))
-                    {
-                        if (newNumber > Convert.ToInt32(currentStart.Substring(1, 1)))
-                        {
-                            currentStart += newNumber;
-                        }
-                    }
-                    else
-                    {
-                        currentStart = currentStart.Substring(0, 1) + newNumber + currentStart.Substring(1, 1);
-                    }
-                }
-                else
-                {
-                    currentStart = newNumber + currentStart;
-                }
-            }
-            return currentStart;
-        }
         #endregion
 
+        #region Arduino
         public void NextArduinoStep()
         {
             moveArduinoCounter++;
             moveBusy = false;
         }
+        #endregion
 
-        private void tmrArduino_Tick(object sender, EventArgs e)
+        #region Wizard
+        public void GetWizardMoveOptions() 
         {
-            lblStatus.Text = "Arduino is busy";
-
-            if (moveArduinoCounter == 0)
+            if (activePiece.GetName() == "Wizard")
             {
-                commando = $"RS:{oldBoard.GetArduinoRot()}";
-            }
-            else if (moveArduinoCounter == 1)
-            {
-                commando = $"HS:{oldBoard.GetArduinoHor()}";
-            }
-            else if (moveArduinoCounter == 2)
-            {
-                commando = $"VS:{oldBoard.GetArduinoVer()}";
-            }
-            else if (moveArduinoCounter == 3)
-            {
-                commando = $"CS:1";
-            }
-            else if (moveArduinoCounter == 4)
-            {
-                commando = $"SS:1";
-            }
-            else if (moveArduinoCounter == 5)
-            {
-                commando = $"VS:{850}";
-            }
-            else if (moveArduinoCounter == 6)
-            {
-                commando = $"RS:{newBoard.GetArduinoRot()}";
-            }
-            else if (moveArduinoCounter == 7)
-            {
-                commando = $"HS:{newBoard.GetArduinoHor()}";
-            }
-            /*            else if (moveArduinoCounter == 8)
-                        {
-                            commando = $"VS:1150";
-                        }*/
-            else if (moveArduinoCounter == 8)
-            {
-                commando = $"SS:0";
-            }
-            else if (moveArduinoCounter == 9)
-            {
-                commando = $"CS:0";
-            }
-            else if (moveArduinoCounter == 10)
-            {
-                commando = $"ZS:3";
-            }
-            else if (moveArduinoCounter == 11)
-            {
-                commando = $"ZS:2";
-            }
-            else if (moveArduinoCounter == 12)
-            {
-                commando = $"ZS:1";
-            }
-            else if (moveArduinoCounter == 13)
-            {
-                tmrArduino.Enabled = false;
-                UpdateAllBoardColors();
-                gameStart = true;
-                CheckWinner();
+                foreach (PictureBox pb in gbxBoard.Controls.OfType<PictureBox>())
+                {
+                    Board b = boardList.FirstOrDefault(x => x.GetPictureName() == pb.Name);
+                    if (pb.Image == null || b.GetPiece().GetColor() == turnColor)
+                    {
+                        pb.BackColor = Color.Green;
+                    }
+                }
             }
 
-            if (moveBusy == false)
-            {
-                moveBusy = true;
-                arduinoForm.WriteArduino(commando);
-            }
         }
+        #endregion
     }
 }

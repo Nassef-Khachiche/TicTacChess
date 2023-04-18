@@ -92,9 +92,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\white_wizard1.png" />
+    <None Include="Resources\black_king1.png" />
     <Content Include="Resources\black_knight.png" />
     <Content Include="Resources\black_queen.png" />
     <Content Include="Resources\black_rook.png" />
+    <None Include="Resources\black_wizard1.png" />
+    <None Include="Resources\white_king1.png" />
     <Content Include="Resources\white_knight.png" />
     <Content Include="Resources\white_queen.png" />
     <Content Include="Resources\white_rook.png" />

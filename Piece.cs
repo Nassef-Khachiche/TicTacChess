@@ -62,6 +62,7 @@ namespace TicTacChess
                 case "Rook": MoveRook(); break;
                 case "Knight": MoveKnight(); break;
                 case "Queen": MoveQueen(); break;
+                case "King": MoveKing(); break;
                 default:
                     break;
             }
@@ -114,6 +115,19 @@ namespace TicTacChess
                 }
             }
         }
+
+        public void MoveKing()
+        {
+            int tempHor = Math.Abs(newHor - oldHor);
+            int tempVer = Math.Abs(newVer - oldVer);
+
+            /* Check if the king can move one square in any direction, including diagonally */
+            if (tempHor <= 1 && tempVer <= 1 && (tempHor != 0 || tempVer != 0))
+            {
+                moveOptions = newHor.ToString() + newVer.ToString();
+            }
+        }
+
         public void MoveKnight()
         {
             int tempHor = Math.Abs(newHor - oldHor);

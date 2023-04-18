@@ -31,6 +31,18 @@ namespace TicTacChess
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            this.gbxPieces = new System.Windows.Forms.GroupBox();
+            this.lblStatus = new System.Windows.Forms.Label();
+            this.btnRestart = new System.Windows.Forms.Button();
+            this.rdbWhite = new System.Windows.Forms.RadioButton();
+            this.rdbBlack = new System.Windows.Forms.RadioButton();
+            this.cbxArduino = new System.Windows.Forms.CheckBox();
+            this.tmrArduino = new System.Windows.Forms.Timer(this.components);
+            this.pcbWizard = new System.Windows.Forms.PictureBox();
+            this.pcbKing = new System.Windows.Forms.PictureBox();
+            this.pcbQueen = new System.Windows.Forms.PictureBox();
+            this.pcbRook = new System.Windows.Forms.PictureBox();
+            this.pcbKnight = new System.Windows.Forms.PictureBox();
             this.gbxBoard = new System.Windows.Forms.GroupBox();
             this.pcbNine = new System.Windows.Forms.PictureBox();
             this.pcbEight = new System.Windows.Forms.PictureBox();
@@ -41,16 +53,12 @@ namespace TicTacChess
             this.pcbThree = new System.Windows.Forms.PictureBox();
             this.pcbTwo = new System.Windows.Forms.PictureBox();
             this.pcbOne = new System.Windows.Forms.PictureBox();
-            this.gbxPieces = new System.Windows.Forms.GroupBox();
-            this.pcbQueen = new System.Windows.Forms.PictureBox();
-            this.pcbRook = new System.Windows.Forms.PictureBox();
-            this.pcbKnight = new System.Windows.Forms.PictureBox();
-            this.lblStatus = new System.Windows.Forms.Label();
-            this.btnRestart = new System.Windows.Forms.Button();
-            this.rdbWhite = new System.Windows.Forms.RadioButton();
-            this.rdbBlack = new System.Windows.Forms.RadioButton();
-            this.cbxArduino = new System.Windows.Forms.CheckBox();
-            this.tmrArduino = new System.Windows.Forms.Timer(this.components);
+            this.gbxPieces.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pcbWizard)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pcbKing)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pcbQueen)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pcbRook)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pcbKnight)).BeginInit();
             this.gbxBoard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbNine)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbEight)).BeginInit();
@@ -61,11 +69,142 @@ namespace TicTacChess
             ((System.ComponentModel.ISupportInitialize)(this.pcbThree)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbTwo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbOne)).BeginInit();
-            this.gbxPieces.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pcbQueen)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pcbRook)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pcbKnight)).BeginInit();
             this.SuspendLayout();
+            // 
+            // gbxPieces
+            // 
+            this.gbxPieces.Controls.Add(this.pcbWizard);
+            this.gbxPieces.Controls.Add(this.pcbKing);
+            this.gbxPieces.Controls.Add(this.pcbQueen);
+            this.gbxPieces.Controls.Add(this.pcbRook);
+            this.gbxPieces.Controls.Add(this.pcbKnight);
+            this.gbxPieces.Location = new System.Drawing.Point(485, 87);
+            this.gbxPieces.Name = "gbxPieces";
+            this.gbxPieces.Size = new System.Drawing.Size(248, 371);
+            this.gbxPieces.TabIndex = 1;
+            this.gbxPieces.TabStop = false;
+            this.gbxPieces.Text = "Pieces";
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.lblStatus.Location = new System.Drawing.Point(161, 52);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(197, 20);
+            this.lblStatus.TabIndex = 2;
+            this.lblStatus.Text = "Start game, Setup pieces";
+            // 
+            // btnRestart
+            // 
+            this.btnRestart.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnRestart.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnRestart.Location = new System.Drawing.Point(12, 12);
+            this.btnRestart.Name = "btnRestart";
+            this.btnRestart.Size = new System.Drawing.Size(129, 60);
+            this.btnRestart.TabIndex = 3;
+            this.btnRestart.Text = "Restart Game";
+            this.btnRestart.UseVisualStyleBackColor = false;
+            this.btnRestart.Click += new System.EventHandler(this.btnRestart_Click);
+            // 
+            // rdbWhite
+            // 
+            this.rdbWhite.AutoSize = true;
+            this.rdbWhite.Location = new System.Drawing.Point(485, 51);
+            this.rdbWhite.Name = "rdbWhite";
+            this.rdbWhite.Size = new System.Drawing.Size(65, 21);
+            this.rdbWhite.TabIndex = 4;
+            this.rdbWhite.TabStop = true;
+            this.rdbWhite.Text = "White";
+            this.rdbWhite.UseVisualStyleBackColor = true;
+            this.rdbWhite.CheckedChanged += new System.EventHandler(this.rdbWhite_CheckedChanged);
+            // 
+            // rdbBlack
+            // 
+            this.rdbBlack.AutoSize = true;
+            this.rdbBlack.Location = new System.Drawing.Point(645, 51);
+            this.rdbBlack.Name = "rdbBlack";
+            this.rdbBlack.Size = new System.Drawing.Size(63, 21);
+            this.rdbBlack.TabIndex = 5;
+            this.rdbBlack.TabStop = true;
+            this.rdbBlack.Text = "Black";
+            this.rdbBlack.UseVisualStyleBackColor = true;
+            this.rdbBlack.CheckedChanged += new System.EventHandler(this.rdbBlack_CheckedChanged);
+            // 
+            // cbxArduino
+            // 
+            this.cbxArduino.AutoSize = true;
+            this.cbxArduino.Location = new System.Drawing.Point(165, 25);
+            this.cbxArduino.Name = "cbxArduino";
+            this.cbxArduino.Size = new System.Drawing.Size(79, 21);
+            this.cbxArduino.TabIndex = 6;
+            this.cbxArduino.Text = "Arduino";
+            this.cbxArduino.UseVisualStyleBackColor = true;
+            this.cbxArduino.CheckedChanged += new System.EventHandler(this.cbxArduino_CheckedChanged);
+            // 
+            // tmrArduino
+            // 
+            this.tmrArduino.Tick += new System.EventHandler(this.tmrArduino_Tick);
+            // 
+            // pcbWizard
+            // 
+            this.pcbWizard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pcbWizard.Image = global::TicTacChess.Properties.Resources.white_wizard;
+            this.pcbWizard.Location = new System.Drawing.Point(124, 142);
+            this.pcbWizard.Name = "pcbWizard";
+            this.pcbWizard.Size = new System.Drawing.Size(99, 99);
+            this.pcbWizard.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pcbWizard.TabIndex = 13;
+            this.pcbWizard.TabStop = false;
+            this.pcbWizard.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pcbAllPieces_MouseDown);
+            // 
+            // pcbKing
+            // 
+            this.pcbKing.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pcbKing.Image = global::TicTacChess.Properties.Resources.white_king;
+            this.pcbKing.Location = new System.Drawing.Point(124, 22);
+            this.pcbKing.Name = "pcbKing";
+            this.pcbKing.Size = new System.Drawing.Size(99, 99);
+            this.pcbKing.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pcbKing.TabIndex = 12;
+            this.pcbKing.TabStop = false;
+            this.pcbKing.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pcbAllPieces_MouseDown);
+            // 
+            // pcbQueen
+            // 
+            this.pcbQueen.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pcbQueen.Image = ((System.Drawing.Image)(resources.GetObject("pcbQueen.Image")));
+            this.pcbQueen.Location = new System.Drawing.Point(71, 256);
+            this.pcbQueen.Name = "pcbQueen";
+            this.pcbQueen.Size = new System.Drawing.Size(99, 99);
+            this.pcbQueen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pcbQueen.TabIndex = 11;
+            this.pcbQueen.TabStop = false;
+            this.pcbQueen.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pcbAllPieces_MouseDown);
+            // 
+            // pcbRook
+            // 
+            this.pcbRook.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pcbRook.Image = ((System.Drawing.Image)(resources.GetObject("pcbRook.Image")));
+            this.pcbRook.Location = new System.Drawing.Point(19, 142);
+            this.pcbRook.Name = "pcbRook";
+            this.pcbRook.Size = new System.Drawing.Size(99, 99);
+            this.pcbRook.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pcbRook.TabIndex = 10;
+            this.pcbRook.TabStop = false;
+            this.pcbRook.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pcbAllPieces_MouseDown);
+            // 
+            // pcbKnight
+            // 
+            this.pcbKnight.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pcbKnight.Image = ((System.Drawing.Image)(resources.GetObject("pcbKnight.Image")));
+            this.pcbKnight.Location = new System.Drawing.Point(19, 22);
+            this.pcbKnight.Name = "pcbKnight";
+            this.pcbKnight.Size = new System.Drawing.Size(99, 99);
+            this.pcbKnight.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pcbKnight.TabIndex = 9;
+            this.pcbKnight.TabStop = false;
+            this.pcbKnight.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pcbAllPieces_MouseDown);
             // 
             // gbxBoard
             // 
@@ -213,121 +352,12 @@ namespace TicTacChess
             this.pcbOne.DragOver += new System.Windows.Forms.DragEventHandler(this.pcbBoard_DragOver);
             this.pcbOne.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pcbBoard_MouseDown);
             // 
-            // gbxPieces
-            // 
-            this.gbxPieces.Controls.Add(this.pcbQueen);
-            this.gbxPieces.Controls.Add(this.pcbRook);
-            this.gbxPieces.Controls.Add(this.pcbKnight);
-            this.gbxPieces.Location = new System.Drawing.Point(485, 87);
-            this.gbxPieces.Name = "gbxPieces";
-            this.gbxPieces.Size = new System.Drawing.Size(134, 371);
-            this.gbxPieces.TabIndex = 1;
-            this.gbxPieces.TabStop = false;
-            this.gbxPieces.Text = "Pieces";
-            // 
-            // pcbQueen
-            // 
-            this.pcbQueen.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pcbQueen.Image = ((System.Drawing.Image)(resources.GetObject("pcbQueen.Image")));
-            this.pcbQueen.Location = new System.Drawing.Point(19, 256);
-            this.pcbQueen.Name = "pcbQueen";
-            this.pcbQueen.Size = new System.Drawing.Size(99, 99);
-            this.pcbQueen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pcbQueen.TabIndex = 11;
-            this.pcbQueen.TabStop = false;
-            this.pcbQueen.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pcbAllPieces_MouseDown);
-            // 
-            // pcbRook
-            // 
-            this.pcbRook.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pcbRook.Image = ((System.Drawing.Image)(resources.GetObject("pcbRook.Image")));
-            this.pcbRook.Location = new System.Drawing.Point(19, 137);
-            this.pcbRook.Name = "pcbRook";
-            this.pcbRook.Size = new System.Drawing.Size(99, 99);
-            this.pcbRook.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pcbRook.TabIndex = 10;
-            this.pcbRook.TabStop = false;
-            this.pcbRook.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pcbAllPieces_MouseDown);
-            // 
-            // pcbKnight
-            // 
-            this.pcbKnight.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pcbKnight.Image = ((System.Drawing.Image)(resources.GetObject("pcbKnight.Image")));
-            this.pcbKnight.Location = new System.Drawing.Point(19, 22);
-            this.pcbKnight.Name = "pcbKnight";
-            this.pcbKnight.Size = new System.Drawing.Size(99, 99);
-            this.pcbKnight.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pcbKnight.TabIndex = 9;
-            this.pcbKnight.TabStop = false;
-            this.pcbKnight.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pcbAllPieces_MouseDown);
-            // 
-            // lblStatus
-            // 
-            this.lblStatus.AutoSize = true;
-            this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.lblStatus.Location = new System.Drawing.Point(161, 52);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(197, 20);
-            this.lblStatus.TabIndex = 2;
-            this.lblStatus.Text = "Start game, Setup pieces";
-            // 
-            // btnRestart
-            // 
-            this.btnRestart.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.btnRestart.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnRestart.Location = new System.Drawing.Point(12, 12);
-            this.btnRestart.Name = "btnRestart";
-            this.btnRestart.Size = new System.Drawing.Size(129, 60);
-            this.btnRestart.TabIndex = 3;
-            this.btnRestart.Text = "Restart Game";
-            this.btnRestart.UseVisualStyleBackColor = false;
-            this.btnRestart.Click += new System.EventHandler(this.btnRestart_Click);
-            // 
-            // rdbWhite
-            // 
-            this.rdbWhite.AutoSize = true;
-            this.rdbWhite.Location = new System.Drawing.Point(485, 25);
-            this.rdbWhite.Name = "rdbWhite";
-            this.rdbWhite.Size = new System.Drawing.Size(65, 21);
-            this.rdbWhite.TabIndex = 4;
-            this.rdbWhite.TabStop = true;
-            this.rdbWhite.Text = "White";
-            this.rdbWhite.UseVisualStyleBackColor = true;
-            this.rdbWhite.CheckedChanged += new System.EventHandler(this.rdbWhite_CheckedChanged);
-            // 
-            // rdbBlack
-            // 
-            this.rdbBlack.AutoSize = true;
-            this.rdbBlack.Location = new System.Drawing.Point(556, 25);
-            this.rdbBlack.Name = "rdbBlack";
-            this.rdbBlack.Size = new System.Drawing.Size(63, 21);
-            this.rdbBlack.TabIndex = 5;
-            this.rdbBlack.TabStop = true;
-            this.rdbBlack.Text = "Black";
-            this.rdbBlack.UseVisualStyleBackColor = true;
-            this.rdbBlack.CheckedChanged += new System.EventHandler(this.rdbBlack_CheckedChanged);
-            // 
-            // cbxArduino
-            // 
-            this.cbxArduino.AutoSize = true;
-            this.cbxArduino.Location = new System.Drawing.Point(165, 25);
-            this.cbxArduino.Name = "cbxArduino";
-            this.cbxArduino.Size = new System.Drawing.Size(79, 21);
-            this.cbxArduino.TabIndex = 6;
-            this.cbxArduino.Text = "Arduino";
-            this.cbxArduino.UseVisualStyleBackColor = true;
-            this.cbxArduino.CheckedChanged += new System.EventHandler(this.cbxArduino_CheckedChanged);
-            // 
-            // tmrArduino
-            // 
-            this.tmrArduino.Tick += new System.EventHandler(this.tmrArduino_Tick);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(631, 470);
+            this.ClientSize = new System.Drawing.Size(745, 470);
             this.Controls.Add(this.cbxArduino);
             this.Controls.Add(this.rdbBlack);
             this.Controls.Add(this.rdbWhite);
@@ -338,6 +368,12 @@ namespace TicTacChess
             this.Name = "Form1";
             this.Text = "TicTacChess";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.gbxPieces.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pcbWizard)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pcbKing)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pcbQueen)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pcbRook)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pcbKnight)).EndInit();
             this.gbxBoard.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pcbNine)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbEight)).EndInit();
@@ -348,10 +384,6 @@ namespace TicTacChess
             ((System.ComponentModel.ISupportInitialize)(this.pcbThree)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbTwo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbOne)).EndInit();
-            this.gbxPieces.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pcbQueen)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pcbRook)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pcbKnight)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -379,6 +411,8 @@ namespace TicTacChess
         private System.Windows.Forms.RadioButton rdbBlack;
         private System.Windows.Forms.CheckBox cbxArduino;
         private System.Windows.Forms.Timer tmrArduino;
+        private System.Windows.Forms.PictureBox pcbWizard;
+        private System.Windows.Forms.PictureBox pcbKing;
     }
 }
 

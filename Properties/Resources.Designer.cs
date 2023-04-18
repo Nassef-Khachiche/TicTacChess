@@ -63,6 +63,16 @@ namespace TicTacChess.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap black_king {
+            get {
+                object obj = ResourceManager.GetObject("black_king", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap black_knight {
             get {
                 object obj = ResourceManager.GetObject("black_knight", resourceCulture);
@@ -93,6 +103,26 @@ namespace TicTacChess.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap black_wizard {
+            get {
+                object obj = ResourceManager.GetObject("black_wizard", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap white_king {
+            get {
+                object obj = ResourceManager.GetObject("white_king", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap white_knight {
             get {
                 object obj = ResourceManager.GetObject("white_knight", resourceCulture);
@@ -116,6 +146,16 @@ namespace TicTacChess.Properties {
         internal static System.Drawing.Bitmap white_rook {
             get {
                 object obj = ResourceManager.GetObject("white_rook", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap white_wizard {
+            get {
+                object obj = ResourceManager.GetObject("white_wizard", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -186,19 +186,6 @@ namespace TicTacChess
             }
         }
 
-
-        /* Unused function */
-        //public string ReadArduino()
-        //{
-        //    if (receivedString != receivedStringLast)
-        //    {
-        //        PrintLn(receivedString, "G");
-        //    }
-        //    receivedStringLast = receivedString;
-
-        //    return receivedString;
-        //}
-
         #endregion
 
         private void btnSendMessage_Click(object sender, EventArgs e)
@@ -228,9 +215,9 @@ namespace TicTacChess
             WriteArduino("ZS:0");
         }
 
+        /* A sequence of moves for the robot arm */
         private void rtbLogging_TextChanged(object sender, EventArgs e)
         {
-            //Console.WriteLine(mainForm.moveArduinoCounter);
             int totalLines = rtbLogging.Lines.Length;
             string lastLine = rtbLogging.Lines[totalLines - 2]; // last line out
 
