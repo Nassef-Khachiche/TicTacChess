@@ -55,6 +55,18 @@ namespace TicTacChess
         List<string> winlist = null;
         string startingBlack = "012";
         string startingWhite = "678";
+
+        #endregion
+
+        #region Wizard variables
+        Piece newWizPiece;
+        Piece oldWizPiece;
+
+        Board newWizBoard;
+        Board oldWizBoard;
+
+        Image temp;
+
         #endregion
 
         public Form1()
@@ -88,12 +100,31 @@ namespace TicTacChess
                 vertical = Convert.ToInt32(pcbFrom.Tag.ToString().Substring(1, 1));
 
                 activeBoard = boardList.FirstOrDefault(x => x.GetHorizontal() == horizontal && x.GetVertical() == vertical);
+
                 oldBoard = activeBoard;
+                oldWizBoard = activeBoard;
+
                 activePiece = activeBoard.GetPiece();
 
 
+                if (activeBoard.GetPiece() != null && activeBoard.GetPiece().GetName() == "Wizard")
+                {
+                    newWizBoard = activeBoard;
+                    newWizPiece = activePiece;
+
+                    oldWizBoard = activeBoard;
+                    oldWizPiece = activePiece;
+                }
+                else
+                {
+                    if (activePiece != null)
+                    {
+                        ResetBoardOptions();
+                    }
+                }
+
+                
                 GetBoardOptions();
-                ResetBoardOptions();
                 UpdateBoardpieceOptions();
 
                 /* wizard move check */
@@ -110,12 +141,10 @@ namespace TicTacChess
         private void pcbBoard_DragDrop(object sender, DragEventArgs e)
         {
             pcbTo = (PictureBox)sender;
-
             Image getPicture = (Bitmap)e.Data.GetData(DataFormats.Bitmap);
             pcbTo.Image = getPicture;
-            pcbTo.BackColor = Color.Transparent;
 
-            horizontal = Convert.ToInt32(pcbTo.Tag.ToString().Substring(0,1));
+            horizontal = Convert.ToInt32(pcbTo.Tag.ToString().Substring(0, 1));
             vertical = Convert.ToInt32(pcbTo.Tag.ToString().Substring(1, 1));
 
             if (activeBoard != null)
@@ -125,16 +154,17 @@ namespace TicTacChess
                 activePiece.SetCurrentPictureBox(pcbTo.Name);
                 activeBoard.SetPiece(activePiece);
 
-                newBoard = activeBoard;
-                pcbFrom.Image = null;
+                SwitchWizardAsPiece();
 
                 /* Change turn color */
                 if (turnColor == "White")
                 {
+                    lblStatus.Text = "Black's turn";
                     turnColor = "Black";
                 }
                 else
                 {
+                    lblStatus.Text = "White's turn";
                     turnColor = "White";
                 }
 
@@ -154,7 +184,7 @@ namespace TicTacChess
                 onBoardCount++;
                 activePiece.SetIsOnBoard(true);
                 UpdateBoardpieceOptions();
-               
+
             }
 
             ResetBoardOptions();
@@ -180,6 +210,11 @@ namespace TicTacChess
         private void pcbBoard_DragOver(object sender, DragEventArgs e)
         {
             pcbTo = (PictureBox)sender;
+
+            temp = pcbTo.Image;
+            GetWizardMoveOptions();
+
+
             if (pcbTo.BackColor == Color.Green)
             {
                 e.Effect = DragDropEffects.Copy;
@@ -191,22 +226,24 @@ namespace TicTacChess
         }
         private void pcbAllPieces_MouseDown(object sender, MouseEventArgs e)
         {
-            activeBoard = null;
-            pcbFrom = (PictureBox)sender;
-            if (pcbFrom.BackColor == Color.White)
+            if (gameStart != true)
             {
-                foreach (Piece item in pieceList)
+                activeBoard = null;
+                pcbFrom = (PictureBox)sender;
+                if (pcbFrom.BackColor == Color.White)
                 {
-                    if (item.GetBasePictureBoxName() == pcbFrom.Name && item.GetColor() == selectedPieceColor)
+                    foreach (Piece item in pieceList)
                     {
-                        activePiece = item;
-
+                        if (item.GetBasePictureBoxName() == pcbFrom.Name && item.GetColor() == selectedPieceColor)
+                        {
+                            activePiece = item;
+                        }
                     }
+
+                    GetStartingOptions();
+
+                    pcbFrom.DoDragDrop(pcbFrom.Image, DragDropEffects.Copy);
                 }
-
-                GetStartingOptions();
-
-                pcbFrom.DoDragDrop(pcbFrom.Image, DragDropEffects.Copy);
             }
         }
         private void rdbBlack_CheckedChanged(object sender, EventArgs e)
@@ -453,7 +490,7 @@ namespace TicTacChess
         }
 
         /* check winner */
-        public void CheckWinner() 
+        public void CheckWinner()
         {
             string boardOne = "";
             string boardTwo = "";
@@ -470,7 +507,7 @@ namespace TicTacChess
 
                 if (boardList[locOne].GetPiece() != null && boardList[locTwo].GetPiece() != null && boardList[locThree].GetPiece() != null)
                 {
-                    boardOne = boardList[Convert.ToInt32(item.Substring(0,1))].GetPiece().GetColor();
+                    boardOne = boardList[Convert.ToInt32(item.Substring(0, 1))].GetPiece().GetColor();
                     boardTwo = boardList[Convert.ToInt32(item.Substring(1, 1))].GetPiece().GetColor();
                     boardThree = boardList[Convert.ToInt32(item.Substring(2, 1))].GetPiece().GetColor();
 
@@ -485,7 +522,7 @@ namespace TicTacChess
                                 if (endpoisitions != startingWhite)
                                 {
                                     MessageBox.Show("White won", "Winner!", MessageBoxButtons.OK);
-                                    SetupGame();
+                                    Restart();
                                 }
                             }
                             else
@@ -493,7 +530,7 @@ namespace TicTacChess
                                 if (endpoisitions != startingBlack)
                                 {
                                     MessageBox.Show("Black won", "Winner!", MessageBoxButtons.OK);
-                                    SetupGame();
+                                    Restart();
                                 }
                             }
                         }
@@ -659,7 +696,7 @@ namespace TicTacChess
         }
 
         /* Loop trough all the board pieces and handle the turns */
-        public void UpdateAllBoardColors() 
+        public void UpdateAllBoardColors()
         {
             foreach (PictureBox pb in gbxBoard.Controls.OfType<PictureBox>())
             {
@@ -688,14 +725,14 @@ namespace TicTacChess
         #endregion
 
         #region Wizard
-        public void GetWizardMoveOptions() 
+        public void GetWizardMoveOptions()
         {
-            if (activePiece.GetName() == "Wizard")
+            if (activePiece != null && activeBoard != null && activePiece.GetName() == "Wizard" && gameStart == true)
             {
                 foreach (PictureBox pb in gbxBoard.Controls.OfType<PictureBox>())
                 {
                     Board b = boardList.FirstOrDefault(x => x.GetPictureName() == pb.Name);
-                    if (pb.Image == null || b.GetPiece().GetColor() == turnColor)
+                    if (pb.Image == null || b.GetPiece().GetColor() == turnColor && b.GetPiece().GetName() != "Wizard")
                     {
                         pb.BackColor = Color.Green;
                     }
@@ -703,6 +740,43 @@ namespace TicTacChess
             }
 
         }
+        
+        public void SwitchWizardAsPiece()
+        {
+            if (activeBoard.GetPiece().GetName() == "Wizard")
+            {
+                /* get old piece */
+                oldWizPiece = pieceList.FirstOrDefault(x => x.GetCurrentPictureBox() == pcbTo.Name);
+                //newWizPiece = pieceList.FirstOrDefault(x => x.GetCurrentPictureBox() == pcbFrom.Name);
+
+
+                /* Display some debugging code */
+                Debug.WriteLine(pcbFrom.Tag + " - " + pcbTo.Tag);
+
+                /* Swap the images between the two PictureBox controls */
+                pcbFrom.Image = temp;
+
+                /* Swap active piece */
+                if (activePiece != oldWizPiece)
+                {
+                    /* allow the new piece to be the new piece again when the old piece and new piece are not the same */
+                    activeBoard.SetPiece(activePiece);
+                    activeBoard = boardList.FirstOrDefault(x => x.GetPictureName() == pcbTo.Name);
+                    activePiece.SetCurrentPictureBox(pcbTo.Name);
+
+                    oldWizBoard.SetPiece(oldWizPiece);
+                    oldWizBoard = boardList.FirstOrDefault(x => x.GetPictureName() == pcbFrom.Name);
+                    oldWizPiece.SetCurrentPictureBox(pcbFrom.Name);
+                }
+            }
+            else
+            {
+                pcbFrom.BackColor = Color.White;
+                pcbFrom.Image = null;
+            }
+
+        }
+
         #endregion
     }
 }

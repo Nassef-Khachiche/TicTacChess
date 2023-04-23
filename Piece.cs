@@ -63,8 +63,6 @@ namespace TicTacChess
                 case "Knight": MoveKnight(); break;
                 case "Queen": MoveQueen(); break;
                 case "King": MoveKing(); break;
-                default:
-                    break;
             }
 
             return moveOptions;
